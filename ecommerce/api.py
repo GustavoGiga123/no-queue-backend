@@ -86,13 +86,13 @@ class ReservaViewSet(mixins.CreateModelMixin,viewsets.ReadOnlyModelViewSet):
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
-        fields = ['id', 'nome', 'email', 'telefone', 'cidade']
+        fields = ['id', 'nome', 'email', 'telefone', 'cidade','cpf']
 
 class CreateUsuarioSerializer(serializers.ModelSerializer):
     cidade: CidadeSerializer()
     class Meta:
         model = Usuario
-        fields = ['id', 'nome', 'email', 'telefone', 'cidade' ]
+        fields = ['id', 'nome', 'email', 'telefone', 'cidade','cpf' ]
 
 class CreateUsuarioViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
   serializer_class = CreateUsuarioSerializer   
@@ -179,4 +179,12 @@ router.register(r'cidades', CidadeViewSet)
 router.register(r'hotels', HotelViewSet)
 router.register(r'quartos', QuartoViewSet)
 router.register(r'reservas', ReservaViewSet)
+
+
+#Rotas de autenticação
+router.register(r'currentuser', UserDetailsViewSet, basename="Currentuser")
 router.register(r'currentusuario', UsuarioDetailsViewSet, basename="Currentusuario")
+router.register(r'login', LoginViewSet, basename="Login")
+router.register(r'logout', LogoutViewSet, basename="Logout")
+router.register(r'user-registration', UserRegistrationViewSet, basename="User")
+router.register(r'usuarios-create', CreateUsuarioViewSet)

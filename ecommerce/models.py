@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
   
 class Hotel(models.Model):
@@ -37,6 +40,10 @@ class Usuario(models.Model):
   nome = models.CharField("Nome", max_length=255)
   email = models.CharField("E-mail", max_length=100)
   telefone = models.CharField("Telefone", max_length=100, null=True)
+  cidade = models.ForeignKey('Cidade', on_delete=models.PROTECT, verbose_name="Cidade", null=True)
+  user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name="Usuário logado", null=True)
+  cpf = models.CharField("CPF", max_length=100, null=True)
+
  
 
 
